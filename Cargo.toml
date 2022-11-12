@@ -1,0 +1,25 @@
+[package]
+name = "logicaldecoding"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "1.0.66"
+bytes = "1.2.1"
+futures = { version = "0.3.25", features = ["executor"] }
+sqlx = { version = "0.6.2", features = ["runtime-tokio-native-tls", "postgres", "macros", "migrate", "uuid", "json"] }
+tokio = { version = "1.21.2", features = ["full"] }
+tokio-postgres = { git = "https://github.com/MaterializeInc/rust-postgres" }
+tracing = "0.1.37"
+tracing-subscriber = { version = "0.3.16", features = ["env-filter"] }
+uuid = { version = "1.2.1", features = ["v4"] }
+prost = "0.11.2"
+
+[dev-dependencies]
+crossbeam-channel = "0.5.6"
+rand = "0.8.5"
+
+[build-dependencies]
+prost-build = "0.11.2"

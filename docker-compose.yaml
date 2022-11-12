@@ -1,0 +1,14 @@
+services:
+  postgres:
+    image: postgres:14.5
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=password
+    command:
+      - "postgres"
+      - "-c"
+      - "wal_level=logical"
