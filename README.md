@@ -42,5 +42,6 @@ Ideas of what would be helpful:
 Thank you to:
 
 - `rust-postgres`: https://github.com/sfackler/rust-postgres/issues/116
+- [Materialize](https://materialize.com/)'s fork of `rust-postgres` with the patches required to support logical decoding: https://github.com/MaterializeInc/rust-postgres
 - `postgres-decoderbufs`: https://github.com/debezium/postgres-decoderbufs
 - this example: https://github.com/debate-map/app/blob/afc6467b6c6c961f7bcc7b7f901f0ff5cd79d440/Packages/app-server-rs/src/pgclient.rs
