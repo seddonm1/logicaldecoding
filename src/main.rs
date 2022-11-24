@@ -1,7 +1,10 @@
 mod replication;
 mod types;
+use std::env;
+
 use anyhow::Result;
 use replication::Transaction;
+use sqlx::{migrate::Migrator, PgPool};
 use tokio::task;
 use tracing_subscriber::EnvFilter;
 
@@ -13,6 +16,10 @@ async fn main() -> Result<()> {
     tracing_subscriber::fmt::fmt()
         .with_env_filter(EnvFilter::from_default_env())
         .init();
+
+    let m = Migrator::new(std::path::Path::new("./migrations")).await?;
+    let pool = PgPool::connect(&env::var("DATABASE_URL")?).await?;
+    m.run(&pool).await?;
 
     let (ready_tx, ready_rx) = tokio::sync::oneshot::channel::<()>();
     let (tx, _rx) = tokio::sync::broadcast::channel::<Transaction>(100);

@@ -2,11 +2,25 @@
 
 A project to play with and test Postgres logical replication with Rust.
 
+## What
+
+The main test is in `types/mod.rs`.
+
+This test attempts to perform deterministic simulation by first attaching the `logicalreplication` listener to an empty database then:
+
+1. Deterministically produce random batches of transactions and maintaining their impact on an in-memory representation of the table.
+2. Applying the batched transactions to the Postgres database.
+3. Listening to the logical replication stream and trying to apply them to a second in-memory representation of the table.
+4. Stopping the test after `n` iterations and then testing that all three representations align.
+
 ## How to
 
-Start postgres with logical replication mode - see the `docker-compose.yaml`. Run `cargo test`. The main test is in `types/mod.rs`.
+1. Start postgres with logical replication mode - see the `docker-compose.yaml` and the `Dockerfile` for configuration.
+2. Run `cargo install sqlx-cli` to set up the [sqlx](https://github.com/launchbadge/sqlx) command line utility to allow database migrations.
+3. Run `sqlx migrate run` to set up the intial database.
+4. Run `cargo test`.
 
-# Acknowledgements
+## Acknowledgements
 
 Thank you to:
 
