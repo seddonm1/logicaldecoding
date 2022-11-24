@@ -173,9 +173,11 @@ mod test {
         (transactions, tenants)
     }
 
+    /// this test tries an end to end cycle of creating records, updating and applying them to both the database
+    /// and an in memory hashmap representation of the table
     #[sqlx::test]
     async fn test_create(db: PgPool) -> Result<()> {
-        let iterations = 1000;
+        let iterations = 10;
         let interval = Duration::from_millis(100);
 
         let current_database = {
